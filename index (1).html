@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>medicina.etcc | Apuntes para estudiantes</title>
+  <meta name="description" content="Apuntes de medicina y microbiología para estudiantes universitarios. Materiales gratuitos y pagos organizados por materia." />
+
+  <!-- ===== FUENTE ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================
+       VARIABLES — cambiá los colores acá
+       ========================================== */
+    :root {
+      --lila-50:  #F3F0FD;  /* fondo muy suave */
+      --lila-100: #E4DCFA;  /* fondos de sección */
+      --lila-200: #C9B8F4;  /* bordes y accents */
+      --lila-500: #8B5CF6;  /* botones principales */
+      --lila-600: #7C3AED;  /* hover botones */
+      --lila-800: #3B0764;  /* texto sobre lila claro */
+      --verde:    #059669;  /* badge gratis */
+      --verde-bg: #D1FAE5;
+      --rosa:     #BE185D;  /* badge pago */
+      --rosa-bg:  #FCE7F3;
+      --texto:    #1E1B2E;  /* texto principal */
+      --texto-2:  #6B7280;  /* texto secundario */
+      --blanco:   #FFFFFF;
+      --borde:    #E5E7EB;
+    }
+
+    /* ==========================================
+       RESET Y BASE
+       ========================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--lila-50);
+      color: var(--texto);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ==========================================
+       LAYOUT
+       ========================================== */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* ==========================================
+       NAVBAR
+       ========================================== */
+    .nav {
+      background: var(--blanco);
+      border-bottom: 1px solid var(--borde);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--texto);
+    }
+
+    .nav-logo span { color: var(--lila-500); }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--texto-2);
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: var(--lila-100);
+      color: var(--lila-800);
+    }
+
+    /* ==========================================
+       HERO
+       ========================================== */
+    .hero {
+      background: linear-gradient(160deg, var(--lila-100) 0%, var(--blanco) 100%);
+      border-bottom: 1px solid var(--lila-200);
+      padding: 3rem 1.25rem 2.5rem;
+      text-align: center;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--lila-500);
+      color: #fff;
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      border: 3px solid var(--blanco);
+      box-shadow: 0 0 0 3px var(--lila-200);
+    }
+
+    .hero h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--lila-800);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero p {
+      font-size: 14px;
+      color: #7C3AED;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+
+    .social-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .social-btn:active { transform: scale(0.97); }
+
+    .btn-tiktok { background: #111; color: #fff; }
+    .btn-instagram { background: linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); color: #fff; }
+    .btn-whatsapp { background: #25D366; color: #fff; }
+
+    /* ==========================================
+       SECCIONES
+       ========================================== */
+    section {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--lila-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .section-header h2 {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--lila-800);
+    }
+
+    /* ==========================================
+       CARDS INICIO
+       ========================================== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      padding: 1.1rem 1.25rem;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      display: block;
+    }
+
+    .card:hover {
+      border-color: var(--lila-200);
+      box-shadow: 0 4px 16px rgba(139,92,246,0.1);
+    }
+
+    .card-emoji { font-size: 26px; margin-bottom: 0.5rem; }
+    .card-title { font-size: 14px; font-weight: 600; margin-bottom: 0.2rem; }
+    .card-sub { font-size: 12px; color: var(--texto-2); }
+
+    /* ==========================================
+       BADGES
+       ========================================== */
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    .badge-free { background: var(--verde-bg); color: var(--verde); }
+    .badge-paid { background: var(--rosa-bg); color: var(--rosa); }
+    .badge-soon { background: var(--lila-100); color: var(--lila-800); }
+
+    /* ==========================================
+       BOTONES
+       ========================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      border: none;
+    }
+
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary { background: var(--lila-500); color: #fff; }
+    .btn-green   { background: var(--verde);    color: #fff; }
+    .btn-pink    { background: #E11D48;         color: #fff; }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--lila-200);
+      color: var(--lila-800);
+    }
+
+    /* ==========================================
+       APUNTES — FILAS
+       ========================================== */
+    .apunte-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .apunte-row {
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      transition: border-color 0.15s;
+    }
+
+    .apunte-row:hover { border-color: var(--lila-200); }
+
+    .apunte-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 0.3rem;
+    }
+
+    .apunte-title { font-size: 14px; font-weight: 600; }
+    .apunte-desc  { font-size: 12px; color: var(--texto-2); margin-bottom: 0.75rem; }
+    .apunte-price { font-size: 14px; font-weight: 600; color: #E11D48; white-space: nowrap; }
+
+    /* ==========================================
+       MATERIAS — TABLA
+       ========================================== */
+    .materia-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .materia-table th {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--texto-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: left;
+      padding: 0 1rem 0.5rem;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .materia-table td {
+      padding: 0.85rem 1rem;
+      font-size: 13px;
+      border-bottom: 1px solid var(--lila-50);
+      vertical-align: top;
+    }
+
+    .materia-table tr:last-child td { border-bottom: none; }
+
+    .materia-table tr:hover td { background: var(--lila-50); }
+
+    .materia-name { font-weight: 600; margin-bottom: 2px; }
+    .materia-sub  { font-size: 11px; color: var(--texto-2); }
+
+    .badge-row { display: flex; gap: 5px; flex-wrap: wrap; }
+
+    /* ==========================================
+       FAQ
+       ========================================== */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .faq-item {
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 0.9rem 1.25rem;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--texto);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.15s;
+    }
+
+    .faq-question:hover { background: var(--lila-50); }
+
+    .faq-chevron {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+      color: var(--lila-500);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-answer-inner {
+      padding: 0 1.25rem 1rem;
+      font-size: 13px;
+      color: var(--texto-2);
+      line-height: 1.7;
+    }
+
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-item.open .faq-answer  { max-height: 200px; }
+
+    /* ==========================================
+       AVISO / CALLOUT
+       ========================================== */
+    .callout {
+      background: var(--lila-100);
+      border-left: 3px solid var(--lila-500);
+      border-radius: 0 10px 10px 0;
+      padding: 0.85rem 1.1rem;
+      font-size: 13px;
+      color: var(--lila-800);
+      margin-top: 1rem;
+    }
+
+    /* ==========================================
+       FOOTER
+       ========================================== */
+    .footer {
+      background: var(--blanco);
+      border-top: 1px solid var(--borde);
+      text-align: center;
+      padding: 1.75rem 1.25rem;
+      font-size: 12px;
+      color: var(--texto-2);
+    }
+
+    .footer strong { color: var(--lila-500); }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--texto-2);
+      font-size: 12px;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--lila-500); }
+
+    /* ==========================================
+       RESPONSIVE
+       ========================================== */
+    @media (max-width: 520px) {
+      .card-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links a { font-size: 11px; padding: 5px 7px; }
+      .hero h1 { font-size: 20px; }
+      .materia-table td:nth-child(2) { display: none; }
+    }
+
+    @media (max-width: 380px) {
+      .card-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+       ============================================================ -->
+  <nav class="nav" role="navigation" aria-label="Menú principal">
+    <div class="container nav-inner">
+      <a href="#inicio" class="nav-logo">medicina<span>.etcc</span></a>
+      <div class="nav-links">
+        <a href="#gratis"   class="nav-link">Gratis</a>
+        <a href="#comprar"  class="nav-link">Comprar</a>
+        <a href="#materias" class="nav-link">Materias</a>
+        <a href="#faq"      class="nav-link">FAQ</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <header id="inicio" class="hero">
+    <div class="avatar" aria-hidden="true">📚</div>
+
+    <!-- ✏️ EDITÁ: tu nombre y descripción -->
+    <h1>Lucía Nannini</h1>
+    <p>Médica residente · Apuntes para estudiantes universitarios</p>
+
+    <div class="social-row">
+      <!-- ✏️ EDITÁ: reemplazá los href="#" con tus links reales -->
+      <a href="https://www.tiktok.com/@medicina.etcc" target="_blank" rel="noopener" class="social-btn btn-tiktok">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.16 8.16 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+        TikTok
+      </a>
+      <a href="https://www.instagram.com/medicina.etcc" target="_blank" rel="noopener" class="social-btn btn-instagram">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <!-- ============================================================
+           INICIO — ACCESOS RÁPIDOS
+           ============================================================ -->
+      <section id="inicio-cards" aria-label="Accesos rápidos">
+        <div class="section-header">
+          <div class="section-icon" aria-hidden="true">✨</div>
+          <h2>¿Qué encontrás acá?</h2>
+        </div>
+        <div class="card-grid">
+          <a href="#gratis" class="card">
+            <div class="card-emoji">🎁</div>
+            <div class="card-title">Apuntes gratuitos</div>
+            <div class="card-sub">Descargá sin costo</div>
+          </a>
+          <a href="#comprar" class="card">
+            <div class="card-emoji">🛒</div>
+            <div class="card-title">Comprar apuntes</div>
+            <div class="card-sub">Guías completas</div>
+          </a>
+          <a href="#materias" class="card">
+            <div class="card-emoji">📖</div>
+            <div class="card-title">Materias</div>
+            <div class="card-sub">Qué tengo disponible</div>
+          </a>
+          <a href="#faq" class="card">
+            <div class="card-emoji">💬</div>
+            <div class="card-title">Preguntas frecuentes</div>
+            <div class="card-sub">Cómo comprar y más</div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           APUNTES GRATUITOS
+           ✏️ CÓMO ACTUALIZAR: copiá un bloque <div class="apunte-row">
+              y cambiá el título, descripción y el href del botón
+              (pegá el link de Google Drive del PDF con acceso público)
+           ============================================================ -->
+      <section id="gratis" aria-label="Apuntes gratuitos">
+        <div class="section-header">
+          <div class="section-icon" aria-hidden="true">🎁</div>
+          <h2>Apuntes gratuitos</h2>
+        </div>
+
+        <div class="apunte-list">
+
+          <!-- APUNTE GRATIS 1 -->
+          <div class="apunte-row">
+            <div class="apunte-top">
+              <div class="apunte-title">Resumen: Clostridioides difficile</div>
+              <span class="badge badge-free">GRATIS</span>
+            </div>
+            <p class="apunte-desc">Guía rápida de diagnóstico y tratamiento según IDSA/SHEA y ESCMID · PDF 4 páginas</p>
+            <!-- ✏️ Reemplazá el href con el link de descarga de tu PDF en Drive -->
+            <a href="https://drive.google.com/file/d/XXXXXXXXXX/view" target="_blank" rel="noopener" class="btn btn-green">
+              ↓ Descargar PDF
+            </a>
+          </div>
+
+          <!-- APUNTE GRATIS 2 -->
+          <div class="apunte-row">
+            <div class="apunte-top">
+              <div class="apunte-title">Mapa conceptual: Bacilos Gram negativos</div>
+              <span class="badge badge-free">GRATIS</span>
+            </div>
+            <p class="apunte-desc">Enterobacterales y no fermentadores — clasificación, resistencia y relevancia clínica · PDF 2 páginas</p>
+            <a href="https://drive.google.com/file/d/XXXXXXXXXX/view" target="_blank" rel="noopener" class="btn btn-green">
+              ↓ Descargar PDF
+            </a>
+          </div>
+
+          <!-- APUNTE GRATIS 3 -->
+          <div class="apunte-row">
+            <div class="apunte-top">
+              <div class="apunte-title">Ficha: Staphylococcus aureus</div>
+              <span class="badge badge-free">GRATIS</span>
+            </div>
+            <p class="apunte-desc">Virulencia, factores de resistencia y esquemas de tratamiento · PDF 3 páginas</p>
+            <a href="https://drive.google.com/file/d/XXXXXXXXXX/view" target="_blank" rel="noopener" class="btn btn-green">
+              ↓ Descargar PDF
+            </a>
+          </div>
+
+        </div><!-- /apunte-list -->
+      </section>
+
+      <!-- ============================================================
+           COMPRAR APUNTES
+           ✏️ CÓMO ACTUALIZAR: cambiá el título, descripción, precio
+              y el href del botón de formulario (link de tu Google Form)
+           ============================================================ -->
+      <section id="comprar" aria-label="Comprar apuntes">
+        <div class="section-header">
+          <div class="section-icon" aria-hidden="true">🛒</div>
+          <h2>Comprar apuntes</h2>
+        </div>
+
+        <div class="apunte-list">
+
+          <!-- APUNTE PAGO 1 -->
+          <div class="apunte-row">
+            <div class="apunte-top">
+              <div class="apunte-title">Bacteriología Clínica — Paquete completo</div>
+              <span class="apunte-price">$2.500</span>
+            </div>
+            <p class="apunte-desc">Todos los patógenos: Gram+, Gram−, anaerobios, agentes de diarrea · Tablas, esquemas y casos clínicos · 120 páginas</p>
+            <!-- ✏️ Reemplazá el href con el link de tu Google Form -->
+            <a href="https://forms.gle/XXXXXXXXXX" target="_blank" rel="noopener" class="btn btn-primary">
+              📋 Solicitar por formulario
+            </a>
+          </div>
+
+          <!-- APUNTE PAGO 2 -->
+          <div class="apunte-row">
+            <div class="apunte-top">
+              <div class="apunte-title">Infectología VIH — Guía clínica completa</div>
+              <span class="apunte-price">$1.800</span>
+            </div>
+            <p class="apunte-desc">CMV, infecciones oportunistas, TARV, IRIS · Comparativa de guías internacionales (DHHS, EACS, BHIVA) · 80 páginas</p>
+            <a href="https://forms.gle/XXXXXXXXXX" target="_blank" rel="noopener" class="btn btn-primary">
+              📋 Solicitar por formulario
+            </a>
+          </div>
+
+          <!-- APUNTE PAGO 3 -->
+          <div class="apunte-row">
+            <div class="apunte-top">
+              <div class="apunte-title">IPPB — Infecciones de piel y partes blandas</div>
+              <span class="apunte-price">$1.500</span>
+            </div>
+            <p class="apunte-desc">Clasificación, infecciones necrotizantes, GAS invasivo, guías WSES/SIS-E · Esquemas visuales · 60 páginas</p>
+            <a href="https://forms.gle/XXXXXXXXXX" target="_blank" rel="noopener" class="btn btn-primary">
+              📋 Solicitar por formulario
+            </a>
+          </div>
+
+        </div><!-- /apunte-list -->
+
+        <div class="callout">
+          💜 Al completar el formulario, te contacto por WhatsApp o email para coordinar el pago. El PDF llega en menos de 24 hs.
+        </div>
+      </section>
+
+      <!-- ============================================================
+           MATERIAS
+           ✏️ CÓMO ACTUALIZAR: agregá o quitá filas de la tabla
+           ============================================================ -->
+      <section id="materias" aria-label="Materias disponibles">
+        <div class="section-header">
+          <div class="section-icon" aria-hidden="true">📖</div>
+          <h2>Materias disponibles</h2>
+        </div>
+
+        <table class="materia-table" role="table" aria-label="Lista de materias">
+          <thead>
+            <tr>
+              <th scope="col">Materia</th>
+              <th scope="col">Temas incluidos</th>
+              <th scope="col">Disponible</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="materia-name">Bacteriología Clínica</div>
+              </td>
+              <td>
+                <div class="materia-sub">Gram+, Gram−, anaerobios, agentes de diarrea, Nocardia</div>
+              </td>
+              <td>
+                <div class="badge-row">
+                  <span class="badge badge-free">Gratis</span>
+                  <span class="badge badge-paid">Pago</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="materia-name">Infectología Clínica</div>
+              </td>
+              <td>
+                <div class="materia-sub">VIH/SIDA, CMV, IPPB, C. difficile, mordeduras</div>
+              </td>
+              <td>
+                <div class="badge-row">
+                  <span class="badge badge-free">Gratis</span>
+                  <span class="badge badge-paid">Pago</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="materia-name">Virología</div>
+              </td>
+              <td>
+                <div class="materia-sub">Inmunología antiviral, mecanismos de resistencia</div>
+              </td>
+              <td>
+                <div class="badge-row">
+                  <span class="badge badge-paid">Pago</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="materia-name">Más materias próximamente</div>
+              </td>
+              <td>
+                <div class="materia-sub">Seguí en Instagram para novedades 💜</div>
+              </td>
+              <td>
+                <div class="badge-row">
+                  <span class="badge badge-soon">Pronto</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ============================================================
+           PREGUNTAS FRECUENTES
+           ✏️ CÓMO ACTUALIZAR: cambiá el texto dentro de cada
+              .faq-question y .faq-answer-inner, o duplicá un .faq-item
+           ============================================================ -->
+      <section id="faq" aria-label="Preguntas frecuentes">
+        <div class="section-header">
+          <div class="section-icon" aria-hidden="true">💬</div>
+          <h2>Preguntas frecuentes</h2>
+        </div>
+
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              ¿Cómo compro un apunte?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                Hacé clic en "Solicitar por formulario" en el apunte que querés, completá tus datos y te contacto por WhatsApp o email para coordinar el pago. Una vez confirmado, te envío el PDF.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              ¿Qué métodos de pago aceptan?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                Transferencia bancaria, Mercado Pago y Cafecito. Una vez confirmado el pago, el PDF llega en menos de 24 horas a tu correo o WhatsApp.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              ¿Para qué carrera son los apuntes?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                Principalmente para estudiantes de Medicina y Bioquímica, pero son útiles para cualquiera que curse Microbiología o Infectología. El contenido está basado en bibliografía actualizada y guías internacionales.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              ¿Puedo pedir apuntes de un tema específico?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                Sí. Escribime por WhatsApp o Instagram y vemos si tengo el tema disponible o puedo prepararlo. Los pedidos personalizados tienen un precio acordado caso a caso.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              ¿Los materiales gratuitos tienen trampa?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                Para nada. Los gratuitos son materiales reales y completos — están ahí para que conozcas el estilo y la calidad antes de decidir comprar. Sin suscripciones, sin emails, sin trampa.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              ¿Quién hace estos apuntes?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                Soy Lucía, médica residente de Infectología (R2). Los apuntes los elaboro yo misma, basados en bibliografía actualizada, guías internacionales y mi experiencia clínica. También tengo contenido en TikTok e Instagram donde podés conocer más.
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /faq-list -->
+      </section>
+
+    </div><!-- /container -->
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ✏️ EDITÁ: tus links reales de redes sociales
+       ============================================================ -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="https://www.tiktok.com/@medicina.etcc" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.instagram.com/medicina.etcc" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <p>© 2026 <strong>medicina.etcc</strong> · Todos los derechos reservados</p>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT — FAQ accordion + nav highlight
+       ============================================================ -->
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        // cerrar todos
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        // abrir el clickeado si estaba cerrado
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Highlight nav según scroll
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
